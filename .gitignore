@@ -1,0 +1,14 @@
+## Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.opensdf
+*.sdf
+*.cache
+*.db
+*.opendsb
+*.pubxml
+
+## 임시
+.wav

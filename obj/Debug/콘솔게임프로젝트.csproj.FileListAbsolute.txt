@@ -1,0 +1,7 @@
+C:\dev\VS\콘솔게임프로젝트\bin\Debug\콘솔게임프로젝트.exe.config
+C:\dev\VS\콘솔게임프로젝트\bin\Debug\콘솔게임프로젝트.exe
+C:\dev\VS\콘솔게임프로젝트\bin\Debug\콘솔게임프로젝트.pdb
+C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.csproj.AssemblyReference.cache
+C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.csproj.CoreCompileInputs.cache
+C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.exe
+C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.pdb
