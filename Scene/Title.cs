@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Media;
-using System.Collections.Generic;
 
 public class Title : Scene
 {
@@ -35,12 +33,14 @@ public class Title : Scene
 
         if (Input.KeyDown(Input.Key.Up))
         {
+            Audio.Play("dust01.wav");
             _titleMenu.SelectUp();
             render = true;
         }
 
         if (Input.KeyDown(Input.Key.Down))
         {
+            Audio.Play("dust01.wav");
             _titleMenu.SelectDown();
             render = true;
         }
@@ -48,6 +48,7 @@ public class Title : Scene
 
         if (Input.KeyDown(Input.Key.Enter))
         {
+            Audio.Play("UI01.wav");
             _titleMenu.Select();
         }
     }
@@ -68,9 +69,8 @@ public class Title : Scene
     void SoundTest()
     {
         Audio.Play("Stinger01.wav");
-        Audio.Play("Beep01.wav");
         Console.SetCursorPosition(0, 9);
-        "\n          Left, Right 두가지 사운드가 재생되었습니다".Print(ConsoleColor.Magenta);
+        "\n          사운드가 재생되었습니다".Print(ConsoleColor.Magenta);
     }
 }
 

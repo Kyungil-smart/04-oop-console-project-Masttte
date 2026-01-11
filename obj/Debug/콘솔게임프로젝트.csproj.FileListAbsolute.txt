@@ -5,3 +5,10 @@ C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.csproj.Ass
 C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.csproj.CoreCompileInputs.cache
 C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.exe
 C:\dev\VS\콘솔게임프로젝트\obj\Debug\콘솔게임프로젝트.pdb
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Debug\콘솔게임프로젝트.exe.config
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Debug\콘솔게임프로젝트.exe
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Debug\콘솔게임프로젝트.pdb
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Debug\콘솔게임프로젝트.csproj.AssemblyReference.cache
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Debug\콘솔게임프로젝트.csproj.CoreCompileInputs.cache
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Debug\콘솔게임프로젝트.exe
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Debug\콘솔게임프로젝트.pdb

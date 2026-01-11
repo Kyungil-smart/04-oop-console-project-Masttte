@@ -10,6 +10,7 @@ public class Stages : Scene
 
     public override void Load()
     {
+        Audio.Play("UI01.wav");
         _stageMenu = new MenuList();
         _stageMenu.Add("튜토리얼", () => SceneManager.LoadScene(new Tutorial()));
         _stageMenu.Add("스테이지-1", () => SceneManager.LoadScene(new Stage1()));
@@ -33,12 +34,14 @@ public class Stages : Scene
 
         if (Input.KeyDown(Input.Key.Up))
         {
+            Audio.Play("dust01.wav");
             _stageMenu.SelectUp();
             render = true;
         }
 
         if (Input.KeyDown(Input.Key.Down))
         {
+            Audio.Play("dust01.wav");
             _stageMenu.SelectDown();
             render = true;
         }

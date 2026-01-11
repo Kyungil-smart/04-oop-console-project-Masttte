@@ -11,6 +11,7 @@ public static class Debug
     {
         Normal,
         Warning,
+        Fatal
     }
 
     private static List<(LogType type, string text)> LogList = new List<(LogType type, string text)>();
@@ -23,6 +24,11 @@ public static class Debug
     public static void LogWarning(string text)
     {
         LogList.Add((LogType.Warning, text));
+    }
+
+    public static void LogFatal(string text)
+    {
+        LogList.Add((LogType.Fatal, text));
     }
 
     public static void Render()
@@ -38,10 +44,14 @@ public static class Debug
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
+            else if (log.type == LogType.Fatal)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
             Console.WriteLine(log.text);
         }
         Console.ResetColor();
-        "-------- Enter를 눌러 나가기".Print(ConsoleColor.Red);
+        "-------- Enter를 눌러 나가기".Print(ConsoleColor.Magenta);
     }
 }
 

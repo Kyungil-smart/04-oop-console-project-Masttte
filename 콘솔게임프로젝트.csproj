@@ -43,7 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Character\DrawL.cs" />
+    <Compile Include="Character\DrawR.cs" />
+    <Compile Include="Character\PlayerBeat.cs" />
+    <Compile Include="Character\Spawn.cs" />
+    <Compile Include="Scene\GameOver.cs" />
     <Compile Include="Scene\Stage1.cs" />
+    <Compile Include="Character\Draw.cs" />
+    <Compile Include="Util\Coroutine.cs" />
     <Compile Include="Util\Debug.cs" />
     <Compile Include="UI\LogScene.cs" />
     <Compile Include="Scene\Stages.cs" />

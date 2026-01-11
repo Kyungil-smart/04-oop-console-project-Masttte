@@ -22,20 +22,24 @@ public static class GameManager
         LogScene logScene = new LogScene();
         SceneManager.LoadScene(titleScene);
 
+        DateTime lastUpdate = DateTime.Now;
+
         while (true)
         {
+            DateTime now = DateTime.Now;
+            float deltaTime = (float)(now - lastUpdate).TotalSeconds;
+            lastUpdate = now;
+
             Input.Update();
-            
+            Coroutine.Update(deltaTime);
             SceneManager.Update();
 
-            // 뒤로가기
-            if (Input.KeyDown(Input.Key.Q)) SceneManager.LoadPrevScene();
+            if (Input.KeyDown(Input.Key.Q)) SceneManager.LoadPrevScene(); // 뒤로가기
 
-            // 로그씬 (디버그용)
             if (Input.KeyDown(Input.Key.L) && SceneManager._current != logScene) 
-                SceneManager.LoadScene(logScene);
+                SceneManager.LoadScene(logScene); // 디버그 용
 
-            System.Threading.Thread.Sleep(16);  // 60 FPS
+            System.Threading.Thread.Sleep(13);  // 75 FPS
         }
     }
 }
