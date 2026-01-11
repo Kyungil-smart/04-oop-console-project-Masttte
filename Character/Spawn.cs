@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 public static class Spawn
 {
-    public static void SpawnRabbit()
+    public static void SpawnRabbit(BeatR beatR)
     {
-        Coroutine.StartCoroutine(RabbitRoutine());
+        Coroutine.StartCoroutine(RabbitRoutine(beatR));
     }
-    private static IEnumerator RabbitRoutine()
+    private static IEnumerator RabbitRoutine(BeatR beatR)
     {
         // 1
         Draw.DrawRabbit(10);
@@ -33,7 +33,7 @@ public static class Spawn
 
         yield return new WaitForSeconds(0.1f);
 
-        BeatR.CanAttack = true; // 판정 시작
+        beatR.CanAttack = true; // 판정 시작
 
         yield return new WaitForSeconds(0.4f);
 
@@ -43,11 +43,11 @@ public static class Spawn
         Audio.Play("Kick01.wav");
     }
 
-    public static void SpawnSlime()
+    public static void SpawnSlime(BeatL beatL)
     {
-        Coroutine.StartCoroutine(SlimeRoutine());
+        Coroutine.StartCoroutine(SlimeRoutine(beatL));
     }
-    private static IEnumerator SlimeRoutine()
+    private static IEnumerator SlimeRoutine(BeatL beatL)
     {
         Draw.DrawSlime(1);
         Audio.Play("Water01.wav");
@@ -63,7 +63,7 @@ public static class Spawn
         Audio.Play("Water01.wav");
         yield return new WaitForSeconds(0.2f);
 
-        BeatL.CanAttack = true;
+        beatL.CanAttack = true;
 
         yield return new WaitForSeconds(0.1f);
 

@@ -5,6 +5,12 @@ public class Stage1 : Scene
 {
     int step;
 
+    BeatR BeatR = new BeatR();
+    BeatR BeatR2 = new BeatR();
+
+    BeatL BeatL = new BeatL();
+    BeatL BeatL2 = new BeatL();
+
     public override void Load()
     {
         step = 1;
@@ -29,12 +35,12 @@ public class Stage1 : Scene
             render = false;
         }
         // 공격
-        if (Input.KeyDown(Input.Key.Left) && BeatL.CanAttack)
+        if (Input.KeyDown(Input.Key.Left) && (BeatL.CanAttack || BeatL2.CanAttack))
         {
             Player.OnJudge += OnBeatJudgeL;
             BeatL.TryLeftAttack();
         }
-        if (Input.KeyDown(Input.Key.Right) && BeatR.CanAttack)
+        if (Input.KeyDown(Input.Key.Right) && (BeatR.CanAttack || BeatR2.CanAttack))
         {
             Player.OnJudge += OnBeatJudgeR;
             BeatR.TryRightAttack();
@@ -44,13 +50,13 @@ public class Stage1 : Scene
     private IEnumerator Stage1_Start()
     {
         Draw.DrawPlayer(6);
-        Spawn.SpawnRabbit();
+        Spawn.SpawnRabbit(BeatR);
         yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnSlime();
+        Spawn.SpawnSlime(BeatL);
         yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnRabbit();
+        Spawn.SpawnRabbit(BeatR2);
         yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnSlime();
+        Spawn.SpawnSlime(BeatL);
     }
 
     private void OnBeatJudgeR(HitType hitType)

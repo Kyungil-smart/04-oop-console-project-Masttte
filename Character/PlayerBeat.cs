@@ -82,9 +82,6 @@ public class Player
 
     public static void Reset()
     {
-        BeatR.CanAttack = false;
-        BeatL.CanAttack = false;
-        BeatU.CanAttack = false;
         somethingMissed = false;
         IsGameOver = false;
         combo = 0;
@@ -97,10 +94,10 @@ public class Player
 
 public class BeatR : Player
 {
-    private static DateTime perfectTime; // 자식이 나눠가져서 각각 판정을 하게하는 중요한 변수
-    private static bool _canAttack;
+    private DateTime perfectTime; // 자식이 나눠가져서 각각 판정을 하게하는 중요한 변수
+    private bool _canAttack;
 
-    public static bool CanAttack
+    public bool CanAttack
     {
         get => _canAttack;
         set
@@ -115,7 +112,7 @@ public class BeatR : Player
         }
     }
 
-    public static HitType TryRightAttack()
+    public HitType TryRightAttack()
     {
         if (!_canAttack) return HitType.None;
 
@@ -130,10 +127,10 @@ public class BeatR : Player
 
 public class BeatL : Player
 {
-    private static DateTime perfectTime;
-    private static bool _canAttack;
+    private DateTime perfectTime;
+    private bool _canAttack;
 
-    public static bool CanAttack
+    public bool CanAttack
     {
         get => _canAttack;
         set
@@ -148,7 +145,7 @@ public class BeatL : Player
         }
     }
 
-    public static HitType TryLeftAttack()
+    public HitType TryLeftAttack()
     {
         if (!_canAttack) return HitType.None;
 

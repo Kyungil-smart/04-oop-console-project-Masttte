@@ -5,6 +5,12 @@ public class Tutorial : Scene
 {
     int step;
 
+    BeatR BeatR1 = new BeatR();
+    BeatR BeatR2 = new BeatR();
+
+    BeatL BeatL1 = new BeatL();
+    BeatL BeatL2 = new BeatL();
+
     public override void Load()
     {
         step = 0;
@@ -41,16 +47,32 @@ public class Tutorial : Scene
         }
 
         // 공격
-        if (Input.KeyDown(Input.Key.Left) && BeatL.CanAttack)
+        if (Input.KeyDown(Input.Key.Left))
         {
-            Player.OnJudge += OnBeatJudgeL;
-            BeatL.TryLeftAttack();
+            if (BeatL1.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeL;
+                BeatL1.TryLeftAttack();
+            }
+            else if (BeatL2.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeL;
+                BeatL2.TryLeftAttack();
+            }
         }
 
-        if (Input.KeyDown(Input.Key.Right) && BeatR.CanAttack)
+        if (Input.KeyDown(Input.Key.Right))
         {
-            Player.OnJudge += OnBeatJudgeR;
-            BeatR.TryRightAttack();
+            if (BeatR1.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeR;
+                BeatR1.TryRightAttack();
+            }
+            else if (BeatR2.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeR;
+                BeatR2.TryRightAttack();
+            }
         }
 
         if (Input.KeyDown(Input.Key.Enter) && step == 2)
@@ -83,17 +105,22 @@ public class Tutorial : Scene
 
         yield return new WaitForSeconds(1.0f);
 
-        Spawn.SpawnRabbit();
+        Spawn.SpawnRabbit(BeatR2);
 
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(1.0f);
+        Console.SetCursorPosition(10, 13);
+        "                                        ".Print();
+        yield return new WaitForSeconds(2.0f);
 
-        Spawn.SpawnRabbit();
+        Spawn.SpawnRabbit(BeatR1);
 
         yield return new WaitForSeconds(2f);
 
-        Spawn.SpawnRabbit();
+        Spawn.SpawnRabbit(BeatR1);
+        yield return new WaitForSeconds(0.505f);
+        Spawn.SpawnRabbit(BeatR2);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         Console.SetCursorPosition(21, 12);
         "⇑⇑⇑".Print(ConsoleColor.Yellow);
@@ -105,25 +132,28 @@ public class Tutorial : Scene
         "                                        ".Print();
         yield return new WaitForSeconds(0.5f);
 
-        Spawn.SpawnSlime();
+        Spawn.SpawnSlime(BeatL1);
 
         yield return new WaitForSeconds(3.0f);
 
-        Spawn.SpawnSlime();
+        Spawn.SpawnSlime(BeatL1);
 
         yield return new WaitForSeconds(2f);
         Console.SetCursorPosition(10, 13);
         "양방향에서 오는 폴리리듬을 준비하세요".Print();
 
         yield return new WaitForSeconds(3.0f);
-        Spawn.SpawnSlime();
-        Spawn.SpawnRabbit();
+        Spawn.SpawnSlime(BeatL1);
+        Spawn.SpawnRabbit(BeatR1);
 
         yield return new WaitForSeconds(2.5f);
-        Spawn.SpawnSlime();
-        Spawn.SpawnRabbit();
+        Spawn.SpawnSlime(BeatL1);
+        Spawn.SpawnRabbit(BeatR1);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(0.5f);
+        Spawn.SpawnSlime(BeatL2);
+
+        yield return new WaitForSeconds(2.0f);
         step++;
         render = true;
     }
@@ -151,8 +181,6 @@ public class Tutorial : Scene
 
         Console.SetCursorPosition(23, 17);
         $"Combo: {Player.combo}x".Print(ConsoleColor.Cyan);
-        Console.SetCursorPosition(10, 13);
-        "                                        ".Print();
     }
 
     private void OnBeatJudgeL(HitType hitType)
@@ -219,7 +247,7 @@ public class Tutorial : Scene
         Console.SetCursorPosition(7, 7);
         $"CRIT: {Player.criticals}".Print(ConsoleColor.Yellow);
         Console.SetCursorPosition(7, 8);
-        $"PERF: {Player.perfects}".Print(ConsoleColor.Green);
+        $"PERF: {Player.perfects}".Print(ConsoleColor.Cyan);
         Console.SetCursorPosition(7, 9);
         $"GOOD: {Player.goods}".Print(ConsoleColor.Blue);
         Console.SetCursorPosition(7, 12);
