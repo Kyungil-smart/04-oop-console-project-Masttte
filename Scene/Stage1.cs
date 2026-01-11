@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 public class Stage1 : Scene
 {
     int step;
 
-    BeatR BeatR1 = new BeatR(); BeatR BeatR3 = new BeatR();
+    BeatR BeatR1 = new BeatR();
     BeatR BeatR2 = new BeatR();
 
     BeatL BeatL1 = new BeatL();
     BeatL BeatL2 = new BeatL();
+
+    BeatU BeatU1 = new BeatU();
 
     public override void Load()
     {
@@ -21,6 +21,9 @@ public class Stage1 : Scene
     }
     public override void Unload()
     {
+        Player.OnJudge -= OnBeatJudgeR;
+        Player.OnJudge -= OnBeatJudgeL;
+        Player.OnJudge -= OnBeatJudgeU;
     }
 
     public override void Update()
@@ -36,7 +39,7 @@ public class Stage1 : Scene
             render = false;
         }
 
-        if (Input.KeyDown(Input.Key.Right)) // 크아아 하드코딩 느낌이잖아~~ 바꾸다가 버그가 많아서 일단 보류
+        if (Input.KeyDown(Input.Key.Right))
         {
             if (BeatR1.CanAttack)
             {
@@ -47,11 +50,6 @@ public class Stage1 : Scene
             {
                 Player.OnJudge += OnBeatJudgeR;
                 BeatR2.TryAttack();
-            }
-            else if (BeatR3.CanAttack)
-            {
-                Player.OnJudge += OnBeatJudgeR;
-                BeatR3.TryAttack();
             }
         }
 
@@ -68,12 +66,23 @@ public class Stage1 : Scene
                 BeatL2.TryAttack();
             }
         }
+
+        if (Input.KeyDown(Input.Key.Up))
+        {
+            if (BeatU1.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeU;
+                BeatU1.TryAttack();
+            }
+        }
     }
 
     private IEnumerator Stage1_Start()
     {
         Draw.Player(6);
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(1.3f);
         Draw.Door(11);
         Audio.Play("DoorApear.wav");
         yield return new WaitForSeconds(2.6f);
@@ -84,10 +93,36 @@ public class Stage1 : Scene
         yield return new WaitForSeconds(2.6f);
         Spawn.Ghost(BeatR1);
         yield return new WaitForSeconds(2.6f);
+
         Audio.Play("Scape02.wav");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.3f);
         Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(1.3f);
         Spawn.Ghost(BeatR1);
+        yield return new WaitForSeconds(1.3f);
+        Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(1.3f);
+        Spawn.Ghost(BeatR1);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.Knocker(BeatL2);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.Knocker(BeatL1);
+        Spawn.Ghost(BeatR2);
+
+        yield return new WaitForSeconds(2.6f);
+        Audio.Play("Scape01.wav");
+        yield return new WaitForSeconds(0.65f);
+        Spawn.RabbitL(BeatL2);
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(1.3f);
+        Spawn.Ghost(BeatR1);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.Ghost(BeatR1);
+
+        yield return new WaitForSeconds(2.6f);
+        Spawn.AirEnemy(BeatU1);
     }
 
     private void OnBeatJudgeR(HitType hitType)
@@ -136,6 +171,29 @@ public class Stage1 : Scene
                 break;
         }
 
+        Console.SetCursorPosition(23, 17);
+        $"Combo: {Player.combo}x".Print(ConsoleColor.Cyan);
+    }
+
+    private void OnBeatJudgeU(HitType hitType)
+    {
+        Player.OnJudge -= OnBeatJudgeU;
+        Console.SetCursorPosition(23, 13);
+        switch (hitType)
+        {
+            case HitType.Crit:
+                "CRITICAL!".Print(ConsoleColor.Yellow);
+                break;
+            case HitType.Perf:
+                " PERFECT! ".Print(ConsoleColor.Cyan);
+                break;
+            case HitType.Good:
+                "  GOOD~  ".Print(ConsoleColor.Blue);
+                break;
+            case HitType.Miss:
+                "  MISS?  ".Print(ConsoleColor.Gray);
+                break;
+        }
         Console.SetCursorPosition(23, 17);
         $"Combo: {Player.combo}x".Print(ConsoleColor.Cyan);
     }

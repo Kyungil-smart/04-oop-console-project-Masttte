@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Text.RegularExpressions;
 
 public static partial class Draw
 {
@@ -16,7 +15,7 @@ public static partial class Draw
             for (int i = 0; i < 3; i++)
             {
                 Console.SetCursorPosition(pos.x, pos.y + i);
-                Console.Write("           ");
+                Console.Write("               ");
             }
         }
         else
@@ -38,8 +37,30 @@ public static partial class Draw
         }
     }
 
+    // 칸 번호를 받아 시작좌표를 반환
+    private static (int x, int y) GetGridPosition(int ground)
+    {
+        if (0 < ground && ground <= 13)
+        {
+            int x = (ground - 1) * 5;
+            int y = 9;
+            return (x, y);
+        }
+        // 공중
+        else if (14 <= ground && ground <= 16)
+        {
+            int x = 21;
+            // 14번 부터 공중으로 유형이 바뀌니까 sky로 다시 정의
+            int sky = ground - 14;
+            int y = 6 - (sky * 3); // 6, 3, 0
+
+            return (x, y);
+        }
+
+        return (0, 0);
+    }
     // 5x3 크기의 캐릭터
-    // 전각은 2칸 , 반각은 1칸 으로 5칸 맞추기 (중요!)
+    // 전각은 2칸 , 반각은 1칸 으로 5칸 맞추기
     public static void Player(int ground = 6)
     {
         (int x, int y) pos = GetGridPosition(ground);
@@ -80,7 +101,7 @@ public static partial class Draw
             frame1[i].Print(ConsoleColor.Yellow);
         }
 
-        yield return new WaitForSeconds(0.04f);
+        yield return new WaitForSeconds(0.042f);
 
         string[][] explosions = new string[][]
         {
@@ -112,7 +133,7 @@ public static partial class Draw
             selectedExplosion[i].Print(ConsoleColor.White);
         }
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.052f);
 
         string[] frame3 = new string[]
         {
@@ -127,7 +148,7 @@ public static partial class Draw
             frame3[i].Print(ConsoleColor.Gray);
         }
 
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.042f);
 
         Empty(ground);
     }
@@ -150,27 +171,73 @@ public static partial class Draw
             Art[i].Print(ConsoleColor.DarkMagenta);
         }
     }
-
-    // 칸 번호(1~13)를 받아 시작좌표를 반환
-    private static (int x, int y) GetGridPosition(int ground)
+    public static void DieAirMob()
     {
-        if (0 < ground && ground <= 13)
-        {
-            int x = (ground - 1) * 5;
-            int y = 9;
-            return (x, y);
-        }
-        // 공중
-        else if (14 <= ground && ground <= 16)
-        {
-            int x = 22;
-            // 14번 부터 공중으로 유형이 바뀌니까 sky로 다시 정의
-            int sky = ground - 12;
-            int y = 6 - (sky * 3); // 6, 3, 0
+        Coroutine.StartCoroutine(DieAirMobAnimation());
+    }
+    private static IEnumerator DieAirMobAnimation()
+    {
+        (int x, int y) pos = GetGridPosition(14);
 
-            return (x, y);
+        // 프레임 1 - 충격
+        string[] frame1 = new string[]
+        {
+        "  \\\\   |",
+        " - -  ✦ - -",
+        "  //  | ✧ \\\\ "
+        };
+        for (int i = 0; i < 3; i++)
+        {
+            Console.SetCursorPosition(pos.x, pos.y + i);
+            frame1[i].Print(ConsoleColor.Yellow);
         }
+        yield return new WaitForSeconds(0.041f);
 
-        return (0, 0);
+        // 프레임 2 - 깃털과 폭발
+        string[][] explosions = new string[][]
+        {
+        new string[]
+        {
+            " ✧゜・☆゜",
+            " ゜✦ ✴ ✦゜",
+            "  ☆゜・゜✧ "
+        },
+        new string[]
+        {
+            "  ☆ ✧ . ✦ ",
+            " . ゜✴゜ .",
+            "  ✦ . ✧ ☆ "
+        },
+        new string[]
+        {
+            " ゜✧  ✦ ✧",
+            "  . ゜✴ .",
+            " ゜ ✧  ✧゜"
+        }
+        };
+
+        string[] selectedExplosion = explosions[random.Next(explosions.Length)];
+        for (int i = 0; i < 3; i++)
+        {
+            Console.SetCursorPosition(pos.x, pos.y + i);
+            selectedExplosion[i].Print(ConsoleColor.Magenta);
+        }
+        yield return new WaitForSeconds(0.052f);
+
+        // 프레임 3 - 떨어지는 깃털
+        string[] frame3 = new string[]
+        {
+        " .  '  .  '",
+        "   ·   ·   ",
+        "  .     .  "
+        };
+        for (int i = 0; i < 3; i++)
+        {
+            Console.SetCursorPosition(pos.x, pos.y + i);
+            frame3[i].Print(ConsoleColor.DarkGray);
+        }
+        yield return new WaitForSeconds(0.042f);
+
+        Empty(14);
     }
 }

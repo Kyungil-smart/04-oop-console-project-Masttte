@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 
 public static partial class Draw
 {
@@ -49,13 +50,27 @@ public static partial class Draw
             " │ │ "
         };
 
-        if (ground >= 4)
+        if (ground == 3)
+        {
+            string[] attackArt = new string[]
+            {
+                "╱●◉╲",
+                "┝─╇─┩",
+                " │ │ "
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                attackArt[i].Print(ConsoleColor.Red);
+            }
+        }
+        else if (ground >= 4)
         {
             string[] attackArt = new string[]
             {
                 "╱●●",
-                "╠─╬─╣",
-                " ┃ ┃ "
+                "┝─╇─┩",
+                " │ │ "
             };
             for (int i = 0; i < 3; i++)
             {

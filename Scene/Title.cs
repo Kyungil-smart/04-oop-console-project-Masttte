@@ -12,7 +12,7 @@ public class Title : Scene
         _titleMenu.Add("사운드 재생 확인", SoundTest);
         _titleMenu.Add("도움말", () => { 
             Console.SetCursorPosition(0, 10);
-            "\n          게임 조작법은 튜토리얼에서 숙지하시오!\n          뒤로가기: Q\n          로그출력: L".Print(ConsoleColor.Cyan); 
+            "\n          게임 조작법은 튜토리얼에서 숙지하시오!\n          뒤로가기: Q, NumPad0\n          로그출력: L".Print(ConsoleColor.Cyan); 
         });
         _titleMenu.Add("게임 종료", () => { Environment.Exit(0); });
 

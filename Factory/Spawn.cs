@@ -66,9 +66,9 @@ public static partial class Spawn
     {
         Draw.Knocker(1);
         Audio.Play("Knocks01.wav");
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.125f);
         Draw.Empty(1); Draw.Knocker(2);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.375f);
         Draw.Empty(2); Draw.Knocker(3);
         yield return new WaitForSeconds(0.10f);
         beatL.CanAttack = true;
@@ -90,9 +90,11 @@ public static partial class Spawn
         yield return new WaitForSeconds(1f / 3f);
         Draw.Empty(13); Draw.Ghost(12);
         Audio.Play("Bell01.wav");
-        yield return new WaitForSeconds(2f / 3f);
+        yield return new WaitForSeconds(1f / 3f);
+        Draw.Empty12();
+        yield return new WaitForSeconds(1f / 3f);
         // 1박자 쉬기
-        Draw.Empty12(); Draw.Ghost(10);
+        Draw.Ghost(10);
         Audio.Play("Bell01.wav");
         yield return new WaitForSeconds(1f / 3f);
         Draw.Empty(10); Draw.Ghost(9);

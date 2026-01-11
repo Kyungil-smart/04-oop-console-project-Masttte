@@ -6,8 +6,8 @@ public enum HitType { None, Crit, Perf, Good, Miss }
 public class Player
 {
     // 판정 타이밍
-    protected const float CRIT = 0.042f;
-    protected const float PERF = 0.110f;
+    protected const float CRIT = 0.046f;
+    protected const float PERF = 0.112f;
     protected const float GOOD = 0.203f;
     protected const float MISS = 0.450f;
 
@@ -102,4 +102,4 @@ public abstract class Beat : Player
 
 public class BeatR : Beat { protected override void Attack() => Draw.Die(7); }
 public class BeatL : Beat { protected override void Attack() => Draw.Die(5); }
-public class BeatU : Beat { protected override void Attack() => Draw.Die(11); }
+public class BeatU : Beat { protected override void Attack() => Draw.DieAirMob(); }

@@ -53,7 +53,7 @@ public static class Input
             case Key.Left: return new[] { ConsoleKey.LeftArrow, ConsoleKey.A };
             case Key.Right: return new[] { ConsoleKey.RightArrow, ConsoleKey.D };
             case Key.Enter: return new[] { ConsoleKey.Enter };
-            case Key.Q: return new[] { ConsoleKey.Q };
+            case Key.Q: return new[] { ConsoleKey.Q, ConsoleKey.NumPad0 };
             case Key.L: return new[] { ConsoleKey.L };
             default: return Array.Empty<ConsoleKey>();
         }
