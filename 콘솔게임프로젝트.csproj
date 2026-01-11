@@ -44,9 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character\DrawL.cs" />
+    <Compile Include="Character\DrawObj.cs" />
     <Compile Include="Character\DrawR.cs" />
     <Compile Include="Character\PlayerBeat.cs" />
-    <Compile Include="Character\Spawn.cs" />
+    <Compile Include="Factory\Spawn.cs" />
+    <Compile Include="Factory\SpawnAlt.cs" />
     <Compile Include="Scene\GameOver.cs" />
     <Compile Include="Scene\Stage1.cs" />
     <Compile Include="Character\Draw.cs" />
@@ -66,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\리듬패턴.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

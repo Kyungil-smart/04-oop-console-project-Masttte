@@ -1,42 +1,50 @@
 ﻿using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public static partial class Draw
 {
     private static Random random = new Random();
 
-    public static void DrawEmpty(int ground)
+    public static void Empty(int ground)
     {
         // 배열은 y,x 순서고 커서좌표는 x,y 순서다...
         (int x, int y) pos = GetGridPosition(ground);
 
-        if (ground >= 11)
+        if (ground >= 14)
         {
-            string emptyLine = new string(' ', 11);
             for (int i = 0; i < 3; i++)
             {
                 Console.SetCursorPosition(pos.x, pos.y + i);
-                Console.Write(emptyLine);
+                Console.Write("           ");
             }
         }
         else
         {
-            string emptyLine = new string(' ', 5);
             for (int i = 0; i < 3; i++)
             {
                 Console.SetCursorPosition(pos.x, pos.y + i);
-                Console.Write(emptyLine);
+                Console.Write("     ");
             }
+        }
+    }
+    public static void Empty12() // 왜 이런코드가 존재하는걸까? 그야...12는 특수하니까
+    {
+        (int x, int y) pos = GetGridPosition(12);
+        for (int i = 0; i < 3; i++)
+        {
+            Console.SetCursorPosition(pos.x + 1, pos.y + i);
+            Console.Write("     ");
         }
     }
 
     // 5x3 크기의 캐릭터
     // 전각은 2칸 , 반각은 1칸 으로 5칸 맞추기 (중요!)
-    public static void DrawPlayer(int ground = 6)
+    public static void Player(int ground = 6)
     {
         (int x, int y) pos = GetGridPosition(ground);
 
-        string[] playerArt = new string[]
+        string[] Art = new string[]
         {
             "  O  ",
             "メ`⑊֎",
@@ -46,11 +54,11 @@ public static partial class Draw
         for (int i = 0; i < 3; i++)
         {
             Console.SetCursorPosition(pos.x, pos.y + i);
-            playerArt[i].Print();
+            Art[i].Print();
         }
     }
 
-    public static void DrawDie(int ground)
+    public static void Die(int ground)
     {
         Coroutine.StartCoroutine(DieAnimation(ground));
     }
@@ -121,15 +129,15 @@ public static partial class Draw
 
         yield return new WaitForSeconds(0.03f);
 
-        DrawEmpty(ground);
+        Empty(ground);
     }
 
     // 공중 몬스터 (11x3)
-    public static void DrawAirMonster(int ground)
+    public static void AirMonster(int ground)
     {
         (int x, int y) pos = GetGridPosition(ground);
 
-        string[] airMobArt = new string[]
+        string[] Art = new string[]
         {
         "  /^⧵___/^⧵  ",
         " < ( o.o ) > ",
@@ -139,25 +147,25 @@ public static partial class Draw
         for (int i = 0; i < 3; i++)
         {
             Console.SetCursorPosition(pos.x, pos.y + i);
-            airMobArt[i].Print(ConsoleColor.DarkMagenta);
+            Art[i].Print(ConsoleColor.DarkMagenta);
         }
     }
 
     // 칸 번호(1~13)를 받아 시작좌표를 반환
     private static (int x, int y) GetGridPosition(int ground)
     {
-        if (0 < ground && ground <= 10)
+        if (0 < ground && ground <= 13)
         {
             int x = (ground - 1) * 5;
             int y = 9;
             return (x, y);
         }
         // 공중
-        else if (11 <= ground && ground <= 13)
+        else if (14 <= ground && ground <= 16)
         {
             int x = 22;
-            // 11번 부터 공중으로 유형이 바뀌니까 sky로 다시 정의
-            int sky = ground - 11;
+            // 14번 부터 공중으로 유형이 바뀌니까 sky로 다시 정의
+            int sky = ground - 12;
             int y = 6 - (sky * 3); // 6, 3, 0
 
             return (x, y);

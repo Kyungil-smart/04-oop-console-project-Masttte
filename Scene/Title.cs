@@ -68,7 +68,7 @@ public class Title : Scene
 
     void SoundTest()
     {
-        Audio.Play("Stinger01.wav");
+        Audio.Play("Beep01.wav");
         Console.SetCursorPosition(0, 9);
         "\n          사운드가 재생되었습니다".Print(ConsoleColor.Magenta);
     }

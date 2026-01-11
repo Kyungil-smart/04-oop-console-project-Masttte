@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Stage1 : Scene
 {
     int step;
 
-    BeatR BeatR = new BeatR();
+    BeatR BeatR1 = new BeatR(); BeatR BeatR3 = new BeatR();
     BeatR BeatR2 = new BeatR();
 
-    BeatL BeatL = new BeatL();
+    BeatL BeatL1 = new BeatL();
     BeatL BeatL2 = new BeatL();
 
     public override void Load()
     {
-        step = 1;
         Audio.Play("Scape01.wav");
-        Player.Reset();
+        step = 1;
+        render = true;
     }
-
     public override void Unload()
     {
     }
@@ -34,29 +35,59 @@ public class Stage1 : Scene
             Render();
             render = false;
         }
-        // 공격
-        if (Input.KeyDown(Input.Key.Left) && (BeatL.CanAttack || BeatL2.CanAttack))
+
+        if (Input.KeyDown(Input.Key.Right)) // 크아아 하드코딩 느낌이잖아~~ 바꾸다가 버그가 많아서 일단 보류
         {
-            Player.OnJudge += OnBeatJudgeL;
-            BeatL.TryLeftAttack();
+            if (BeatR1.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeR;
+                BeatR1.TryAttack();
+            }
+            else if (BeatR2.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeR;
+                BeatR2.TryAttack();
+            }
+            else if (BeatR3.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeR;
+                BeatR3.TryAttack();
+            }
         }
-        if (Input.KeyDown(Input.Key.Right) && (BeatR.CanAttack || BeatR2.CanAttack))
+
+        if (Input.KeyDown(Input.Key.Left))
         {
-            Player.OnJudge += OnBeatJudgeR;
-            BeatR.TryRightAttack();
+            if (BeatL1.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeL;
+                BeatL1.TryAttack();
+            }
+            else if (BeatL2.CanAttack)
+            {
+                Player.OnJudge += OnBeatJudgeL;
+                BeatL2.TryAttack();
+            }
         }
     }
 
     private IEnumerator Stage1_Start()
     {
-        Draw.DrawPlayer(6);
-        Spawn.SpawnRabbit(BeatR);
-        yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnSlime(BeatL);
-        yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnRabbit(BeatR2);
-        yield return new WaitForSeconds(1.0f);
-        Spawn.SpawnSlime(BeatL);
+        Draw.Player(6);
+        yield return new WaitForSeconds(1.8f);
+        Draw.Door(11);
+        Audio.Play("DoorApear.wav");
+        yield return new WaitForSeconds(2.6f);
+
+        Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(2.6f);
+        Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(2.6f);
+        Spawn.Ghost(BeatR1);
+        yield return new WaitForSeconds(2.6f);
+        Audio.Play("Scape02.wav");
+        yield return new WaitForSeconds(2.0f);
+        Spawn.Knocker(BeatL1);
+        Spawn.Ghost(BeatR1);
     }
 
     private void OnBeatJudgeR(HitType hitType)
@@ -66,10 +97,10 @@ public class Stage1 : Scene
 
         switch (hitType)
         {
-            case HitType.Critical:
+            case HitType.Crit:
                 "CRITICAL!".Print(ConsoleColor.Yellow);
                 break;
-            case HitType.Perfect:
+            case HitType.Perf:
                 " PERFECT! ".Print(ConsoleColor.Cyan);
                 break;
             case HitType.Good:
@@ -91,11 +122,11 @@ public class Stage1 : Scene
 
         switch (hitType)
         {
-            case HitType.Critical:
+            case HitType.Crit:
                 "CRITICAL!".Print(ConsoleColor.Yellow);
                 break;
-            case HitType.Perfect:
-                " PERFECT! ".Print(ConsoleColor.Green);
+            case HitType.Perf:
+                " PERFECT! ".Print(ConsoleColor.Cyan);
                 break;
             case HitType.Good:
                 "  GOOD~  ".Print(ConsoleColor.Blue);

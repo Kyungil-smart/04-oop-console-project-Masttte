@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-public enum HitType
-{
-    None,
-    Critical,
-    Perfect,
-    Good,
-    Miss,
-}
+public enum HitType { None, Crit, Perf, Good, Miss }
 
 public class Player
 {
@@ -18,10 +11,10 @@ public class Player
     protected const float GOOD = 0.203f;
     protected const float MISS = 0.450f;
 
-    public static int combo;
-    public static int criticals;
-    public static int perfects;
+    public static int crits;
+    public static int perfs;
     public static int goods;
+    public static int combo;
 
     public static Action<HitType> OnJudge;
     public static bool somethingMissed;
@@ -32,30 +25,11 @@ public class Player
     {
         switch (hitType)
         {
-            case HitType.Critical:
-                criticals++;
-                combo++;
-                Audio.Play("Per01.wav");
-                break;
-
-            case HitType.Perfect:
-                perfects++;
-                combo++;
-                Audio.Play("Per01.wav");
-                break;
-
-            case HitType.Good:
-                goods++;
-                combo++;
-                Audio.Play("Per01.wav");
-                break;
-
-            case HitType.Miss:
-                Audio.Play("Miss01.wav");
-                somethingMissed = true;
-                break;
+            case HitType.Crit: crits++; combo++; Audio.Play("Per01.wav"); break;
+            case HitType.Perf: perfs++; combo++; Audio.Play("Per01.wav"); break;
+            case HitType.Good: goods++; combo++; Audio.Play("Per01.wav"); break;
+            case HitType.Miss: Audio.Play("Miss01.wav"); somethingMissed = true; break;
         }
-
         OnJudge?.Invoke(hitType);
     }
 
@@ -65,7 +39,7 @@ public class Player
         yield return new WaitForSeconds(MISS * 2f);
 
         if (direction()) IsGameOver = true; // 공격 안함
-        if (somethingMissed) IsGameOver = true; // 놓침
+        if (somethingMissed) IsGameOver = true; // Miss 판정
     }
 
     // 판정 부분
@@ -73,8 +47,8 @@ public class Player
     {
         float timeDiff = Math.Abs((float)(DateTime.Now - perfectTime).TotalSeconds);
 
-        if (timeDiff <= CRIT) return HitType.Critical;
-        else if (timeDiff <= PERF) return HitType.Perfect;
+        if (timeDiff <= CRIT) return HitType.Crit;
+        else if (timeDiff <= PERF) return HitType.Perf;
         else if (timeDiff <= GOOD) return HitType.Good;
         else if (timeDiff <= MISS) return HitType.Miss;
         else return HitType.None;
@@ -85,47 +59,13 @@ public class Player
         somethingMissed = false;
         IsGameOver = false;
         combo = 0;
-        criticals = 0;
-        perfects = 0;
+        crits = 0;
+        perfs = 0;
         goods = 0;
     }
 }
 
-
-public class BeatR : Player
-{
-    private DateTime perfectTime; // 자식이 나눠가져서 각각 판정을 하게하는 중요한 변수
-    private bool _canAttack;
-
-    public bool CanAttack
-    {
-        get => _canAttack;
-        set
-        {
-            if (value)
-            {
-                _canAttack = true;
-                perfectTime = DateTime.Now.AddSeconds(MISS);
-                Coroutine.StartCoroutine(AttackTimeOver(() => _canAttack));
-            }
-            else _canAttack = false;
-        }
-    }
-
-    public HitType TryRightAttack()
-    {
-        if (!_canAttack) return HitType.None;
-
-        HitType result = Judge(perfectTime);
-        ProcessHit(result);
-        if (result != HitType.Miss) Draw.DrawDie(7);
-
-        _canAttack = false;
-        return result;
-    }
-}
-
-public class BeatL : Player
+public abstract class Beat : Player
 {
     private DateTime perfectTime;
     private bool _canAttack;
@@ -145,48 +85,21 @@ public class BeatL : Player
         }
     }
 
-    public HitType TryLeftAttack()
+    public HitType TryAttack()
     {
         if (!_canAttack) return HitType.None;
 
         HitType result = Judge(perfectTime);
         ProcessHit(result);
-        if (result != HitType.Miss) Draw.DrawDie(5);
+        if (result != HitType.Miss) Attack();
 
         _canAttack = false;
         return result;
     }
+
+    protected abstract void Attack();
 }
 
-public class BeatU : Player
-{
-    private static DateTime perfectTime;
-    private static bool _canAttack;
-
-    public static bool CanAttack
-    {
-        get => _canAttack;
-        set
-        {
-            if (value)
-            {
-                _canAttack = true;
-                perfectTime = DateTime.Now.AddSeconds(MISS);
-                Coroutine.StartCoroutine(AttackTimeOver(() => _canAttack));
-            }
-            else _canAttack = false;
-        }
-    }
-
-    public static HitType TryUpAttack()
-    {
-        if (!_canAttack) return HitType.None;
-
-        HitType result = Judge(perfectTime);
-        ProcessHit(result);
-        if (result != HitType.Miss) Draw.DrawDie(11);
-
-        _canAttack = false;
-        return result;
-    }
-}
+public class BeatR : Beat { protected override void Attack() => Draw.Die(7); }
+public class BeatL : Beat { protected override void Attack() => Draw.Die(5); }
+public class BeatU : Beat { protected override void Attack() => Draw.Die(11); }

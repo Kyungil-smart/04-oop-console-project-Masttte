@@ -1,0 +1,13 @@
+패닉 1
+        yield return new WaitForSeconds(3.0f);
+        Spawn.Rabbit(BeatR1);
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(0.510f);
+        Spawn.Rabbit(BeatR2);
+        yield return new WaitForSeconds(0.510f);
+        Spawn.Rabbit(BeatR1);
+        yield return new WaitForSeconds(0.510f);
+        Spawn.Slime(BeatL1);
+
+패닉 2
+        
