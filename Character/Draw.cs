@@ -154,21 +154,39 @@ public static partial class Draw
     }
 
     // 공중 몬스터 (11x3)
-    public static void AirMonster(int ground)
+    public static void BatMonster(int ground)
     {
         (int x, int y) pos = GetGridPosition(ground);
 
         string[] Art = new string[]
         {
-        "  /^⧵___/^⧵  ",
-        " < ( o.o ) > ",
-        "  V   v   V  "
+        " ⎛⎝(•ᴥ•)⎠⎞",
+        " ⎝(⎝   ⎠)⎠",
+        "    ◡ ◡   "
         };
 
-        for (int i = 0; i < 3; i++)
+        if (ground == 16)
         {
-            Console.SetCursorPosition(pos.x, pos.y + i);
-            Art[i].Print(ConsoleColor.DarkMagenta);
+            string[] attackArt = new string[]
+            {
+                " ⎛⎝(⚆ⱅ⚆)⎠⎞",
+                " ⎝(⎝_  _⎠)⎠",
+                "  † V  V †"
+            };
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                Art[i].Print(ConsoleColor.DarkRed);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                Art[i].Print(ConsoleColor.Magenta);
+            }
         }
     }
     public static void DieAirMob()
@@ -200,19 +218,19 @@ public static partial class Draw
         {
             " ✧゜・☆゜",
             " ゜✦ ✴ ✦゜",
-            "  ☆゜・゜✧ "
+            "   ☆゜・ "
         },
         new string[]
         {
             "  ☆ ✧ . ✦ ",
             " . ゜✴゜ .",
-            "  ✦ . ✧ ☆ "
+            "  ✦ . ✧ "
         },
         new string[]
         {
             " ゜✧  ✦ ✧",
             "  . ゜✴ .",
-            " ゜ ✧  ✧゜"
+            "  ゜   ✧"
         }
         };
 
@@ -229,7 +247,7 @@ public static partial class Draw
         {
         " .  '  .  '",
         "   ·   ·   ",
-        "  .     .  "
+        "  .        "
         };
         for (int i = 0; i < 3; i++)
         {

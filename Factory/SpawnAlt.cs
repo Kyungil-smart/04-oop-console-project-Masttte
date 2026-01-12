@@ -34,15 +34,15 @@ public static partial class Spawn
 
     private static IEnumerator AirEnemyRoutine(BeatU beatU)
     {
-        Draw.AirMonster(16);
-        Audio.Play("dust01.wav");
+        Draw.BatMonster(16);
+        Audio.Play("TH01.wav");
         yield return new WaitForSeconds(0.7f);
-        Draw.Empty(16); Draw.AirMonster(15);
-        Audio.Play("dust01.wav");
+        Draw.Empty(16); Draw.BatMonster(15);
+        Audio.Play("TH02.wav");
         yield return new WaitForSeconds(0.3f);
         beatU.CanAttack = true; // 판정 시작
         yield return new WaitForSeconds(0.4f);
-        Audio.Play("dust01.wav");
-        Draw.Empty(15); Draw.AirMonster(14);
+        Audio.Play("TH02.wav");
+        Draw.Empty(15); Draw.BatMonster(14);
     }
 }

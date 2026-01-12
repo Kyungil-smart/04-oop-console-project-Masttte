@@ -21,6 +21,5 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i -2);
             Art[i].Print(ConsoleColor.Red);
         }
-
     }
 }

@@ -118,11 +118,23 @@ public class Stage1 : Scene
         Spawn.Ghost(BeatR1);
         yield return new WaitForSeconds(0.65f);
         Spawn.Knocker(BeatL1);
-        yield return new WaitForSeconds(0.65f);
-        Spawn.Ghost(BeatR1);
+        Spawn.Ghost(BeatR2);
+        yield return new WaitForSeconds(0.95f);
 
         yield return new WaitForSeconds(2.6f);
         Spawn.AirEnemy(BeatU1);
+        yield return new WaitForSeconds(2.6f);
+        Audio.Play("Scape02.wav");
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(1.3f);
+        Spawn.Ghost(BeatR1);
+        Spawn.Knocker(BeatL1);
+        yield return new WaitForSeconds(0.65f);
+        Spawn.RabbitL(BeatL2);
+        yield return new WaitForSeconds(1.3f);
+        Spawn.AirEnemy(BeatU1);
+        Spawn.Ghost(BeatR1);
+        Spawn.RabbitR(BeatR2);
     }
 
     private void OnBeatJudgeR(HitType hitType)
