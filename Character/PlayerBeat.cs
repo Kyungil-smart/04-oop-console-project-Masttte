@@ -7,9 +7,9 @@ public class Player
 {
     // 판정 타이밍
     protected const float CRIT = 0.046f;
-    protected const float PERF = 0.112f;
-    protected const float GOOD = 0.203f;
-    protected const float MISS = 0.450f;
+    protected const float PERF = 0.110f;
+    protected const float GOOD = 0.177f;
+    protected const float MISS = 0.401f;
 
     public static int crits;
     public static int perfs;
@@ -101,5 +101,7 @@ public abstract class Beat : Player
 }
 
 public class BeatR : Beat { protected override void Attack() => Draw.Die(7); }
+public class BeatR_HP : Beat { protected override void Attack() { } } // 가상의 HP 역할
+public class BeatR_BigFoot : Beat { protected override void Attack() => Draw.DieBigFoot(); }
 public class BeatL : Beat { protected override void Attack() => Draw.Die(5); }
 public class BeatU : Beat { protected override void Attack() => Draw.DieAirMob(); }

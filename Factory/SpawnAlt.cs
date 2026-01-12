@@ -2,7 +2,6 @@
 using System.Collections;
 public static partial class Spawn
 {
-    // 토끼는 1.5 초에 4박자인 리듬
     public static void RabbitL(BeatL beatL)
     {
         Coroutine.StartCoroutine(RabbitRoutineL(beatL));
@@ -26,8 +25,8 @@ public static partial class Spawn
         Audio.Play("Kick01.wav");
     }
 
-    // 공중몹 스폰
-    public static void AirEnemy(BeatU beatU)
+    // 박쥐 1.4 초에 3박자
+    public static void Bat(BeatU beatU)
     {
         Coroutine.StartCoroutine(AirEnemyRoutine(beatU));
     }
@@ -44,5 +43,35 @@ public static partial class Spawn
         yield return new WaitForSeconds(0.4f);
         Audio.Play("TH02.wav");
         Draw.Empty(15); Draw.BatMonster(14);
+    }
+
+    //빅풋 약 2.3 초에 2박자특수
+    public static void BigFoot(BeatR_BigFoot beatR_BigFoot)
+    {
+        Coroutine.StartCoroutine(BigFootRoutine(beatR_BigFoot));
+    }
+    private static IEnumerator BigFootRoutine(BeatR_BigFoot beatR_BigFoot)
+    {
+        Draw.BigFoot(10);
+        Audio.Play("BigFoot01.wav");
+        yield return new WaitForSeconds(0.23f);
+        Draw.EmptyBig(10); Draw.BigFoot(9);
+        yield return new WaitForSeconds(1.77f);
+        beatR_BigFoot.CanAttack = true;
+        Draw.EmptyBig(9); Draw.BigFoot(8);
+        Audio.Play("BigFoot01.wav");
+        yield return new WaitForSeconds(0.26f);
+        Draw.EmptyBig(8); Draw.BigFoot(7);
+    }
+
+    // 빅풋 HP 스폰
+    public static void BigFootHP(BeatR_HP beatR_HP)
+    {
+        Coroutine.StartCoroutine(BigFootHPRoutine(beatR_HP));
+    }
+    private static IEnumerator BigFootHPRoutine(BeatR_HP beatR_HP)
+    {
+        yield return new WaitForSeconds(1.795f);
+        beatR_HP.CanAttack = true;
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="Scene\GameOver.cs" />
     <Compile Include="Scene\Stage1.cs" />
     <Compile Include="Character\Draw.cs" />
+    <Compile Include="Scene\Stage2.cs" />
     <Compile Include="Util\Coroutine.cs" />
     <Compile Include="Util\Debug.cs" />
     <Compile Include="UI\LogScene.cs" />

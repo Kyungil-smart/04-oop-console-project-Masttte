@@ -26,7 +26,7 @@ public static class Debug
         LogList.Add((LogType.Warning, text));
     }
 
-    public static void LogFatal(string text)
+    public static void LogResult(string text)
     {
         LogList.Add((LogType.Fatal, text));
     }

@@ -79,6 +79,58 @@ public static partial class Draw
         }
     }
 
+    // 공중 몬스터 (11x3)
+    public static void BatMonster(int ground)
+    {
+        (int x, int y) pos = GetGridPosition(ground);
+
+        string[] Art = new string[]
+        {
+        " ⎛⎝(•ᴥ•)⎠⎞",
+        " ⎝(⎝   ⎠)⎠",
+        "    '◡◡   "
+        };
+
+        if (ground == 15)
+        {
+            string[] attackArt = new string[]
+            {
+                "⎛ ⎝(•ᴥ•)⎠ ⎞",
+                "⎝ /⎝   ⎠⧵ ⎠",
+                "   `◡ V   "
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                attackArt[i].Print(ConsoleColor.Red);
+            }
+        }
+
+        else if (ground == 14)
+        {
+            string[] attackArt = new string[]
+            {
+                " ⎛⎝(⚆ⱅ⚆)⎠ ⎞",
+                "⎝<⎝_  _⎠> ⎠",
+                "   †◡ V "
+            };
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                attackArt[i].Print(ConsoleColor.DarkRed);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                Art[i].Print(ConsoleColor.Magenta);
+            }
+        }
+    }
+
     public static void Die(int ground)
     {
         Coroutine.StartCoroutine(DieAnimation(ground));
@@ -90,9 +142,9 @@ public static partial class Draw
 
         string[] frame1 = new string[]
         {
-        "\\ | /",
+        "⧵ | /",
         "- ✦ -",
-        "/ | \\"
+        "/ | ⧵"
         };
 
         for (int i = 0; i < 3; i++)
@@ -101,7 +153,7 @@ public static partial class Draw
             frame1[i].Print(ConsoleColor.Yellow);
         }
 
-        yield return new WaitForSeconds(0.042f);
+        yield return new WaitForSeconds(0.047f);
 
         string[][] explosions = new string[][]
         {
@@ -133,7 +185,7 @@ public static partial class Draw
             selectedExplosion[i].Print(ConsoleColor.White);
         }
 
-        yield return new WaitForSeconds(0.052f);
+        yield return new WaitForSeconds(0.056f);
 
         string[] frame3 = new string[]
         {
@@ -148,46 +200,9 @@ public static partial class Draw
             frame3[i].Print(ConsoleColor.Gray);
         }
 
-        yield return new WaitForSeconds(0.042f);
+        yield return new WaitForSeconds(0.059f);
 
         Empty(ground);
-    }
-
-    // 공중 몬스터 (11x3)
-    public static void BatMonster(int ground)
-    {
-        (int x, int y) pos = GetGridPosition(ground);
-
-        string[] Art = new string[]
-        {
-        " ⎛⎝(•ᴥ•)⎠⎞",
-        " ⎝(⎝   ⎠)⎠",
-        "    ◡ ◡   "
-        };
-
-        if (ground == 16)
-        {
-            string[] attackArt = new string[]
-            {
-                " ⎛⎝(⚆ⱅ⚆)⎠⎞",
-                " ⎝(⎝_  _⎠)⎠",
-                "  † V  V †"
-            };
-
-            for (int i = 0; i < 3; i++)
-            {
-                Console.SetCursorPosition(pos.x, pos.y + i);
-                Art[i].Print(ConsoleColor.DarkRed);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                Console.SetCursorPosition(pos.x, pos.y + i);
-                Art[i].Print(ConsoleColor.Magenta);
-            }
-        }
     }
     public static void DieAirMob()
     {
@@ -200,37 +215,37 @@ public static partial class Draw
         // 프레임 1 - 충격
         string[] frame1 = new string[]
         {
-        "  \\\\   |",
-        " - -  ✦ - -",
-        "  //  | ✧ \\\\ "
+        "  ⧵⧵  | /",
+        " - - ✦ - -",
+        "  // | ⧵⧵ "
         };
         for (int i = 0; i < 3; i++)
         {
             Console.SetCursorPosition(pos.x, pos.y + i);
             frame1[i].Print(ConsoleColor.Yellow);
         }
-        yield return new WaitForSeconds(0.041f);
+        yield return new WaitForSeconds(0.047f);
 
         // 프레임 2 - 깃털과 폭발
         string[][] explosions = new string[][]
         {
         new string[]
         {
-            " ✧゜・☆゜",
+            " ✧゜・☆゜ ",
             " ゜✦ ✴ ✦゜",
-            "   ☆゜・ "
+            "   ☆゜・  "
         },
         new string[]
         {
             "  ☆ ✧ . ✦ ",
             " . ゜✴゜ .",
-            "  ✦ . ✧ "
+            "  ✦ . ✧   "
         },
         new string[]
         {
             " ゜✧  ✦ ✧",
             "  . ゜✴ .",
-            "  ゜   ✧"
+            "  ゜   ✧ "
         }
         };
 
@@ -240,7 +255,7 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i);
             selectedExplosion[i].Print(ConsoleColor.Magenta);
         }
-        yield return new WaitForSeconds(0.052f);
+        yield return new WaitForSeconds(0.056f);
 
         // 프레임 3 - 떨어지는 깃털
         string[] frame3 = new string[]
@@ -254,7 +269,7 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i);
             frame3[i].Print(ConsoleColor.DarkGray);
         }
-        yield return new WaitForSeconds(0.042f);
+        yield return new WaitForSeconds(0.059f);
 
         Empty(14);
     }

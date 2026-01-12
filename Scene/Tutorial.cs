@@ -101,7 +101,7 @@ public class Tutorial : Scene
         Console.SetCursorPosition(31, 12);
         "⇑⇑⇑".Print(ConsoleColor.Yellow);
         Console.SetCursorPosition(12, 13);
-        "         4박자 토끼가 접근합니다!".Print();
+        "         4박자 토끼가 접근한 순간 공격!".Print();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -109,7 +109,7 @@ public class Tutorial : Scene
 
         yield return new WaitForSeconds(2.0f);
         Console.SetCursorPosition(10, 13);
-        "                                        ".Print();
+        "                                         ".Print();
         yield return new WaitForSeconds(1.0f);
 
         Spawn.RabbitR(BeatR1);
@@ -140,18 +140,19 @@ public class Tutorial : Scene
 
         yield return new WaitForSeconds(2f);
         Console.SetCursorPosition(10, 13);
-        "양방향에서 오는 폴리리듬을 준비하세요".Print();
+        " 양방향에서 오는 공격을 대비하세요".Print();
 
         yield return new WaitForSeconds(3.0f);
         Spawn.Slime(BeatL1);
         Spawn.RabbitR(BeatR1);
 
-        yield return new WaitForSeconds(2.5f);
-        Spawn.Slime(BeatL1);
-        Spawn.RabbitR(BeatR1);
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.0f);
         Spawn.Slime(BeatL2);
+        yield return new WaitForSeconds(0.25f);
+        Spawn.RabbitR(BeatR1);
+        yield return new WaitForSeconds(0.3f);
+        Spawn.Slime(BeatL1);
+
 
         yield return new WaitForSeconds(2.0f);
         step++;
@@ -169,7 +170,7 @@ public class Tutorial : Scene
                 "CRITICAL!".Print(ConsoleColor.Yellow);
                 break;
             case HitType.Perf:
-                " PERFECT! ".Print(ConsoleColor.Cyan);
+                " PERFECT~  ".Print(ConsoleColor.Cyan);
                 break;
             case HitType.Good:
                 "  GOOD~  ".Print(ConsoleColor.Blue);
@@ -194,7 +195,7 @@ public class Tutorial : Scene
                 "CRITICAL!".Print(ConsoleColor.Yellow);
                 break;
             case HitType.Perf:
-                " PERFECT! ".Print(ConsoleColor.Cyan);
+                " PERFECT~  ".Print(ConsoleColor.Cyan);
                 break;
             case HitType.Good:
                 "  GOOD~  ".Print(ConsoleColor.Blue);
@@ -213,22 +214,24 @@ public class Tutorial : Scene
         Console.Clear();
         Console.SetCursorPosition(14, 2);
         "환영합니다!".Print(ConsoleColor.Yellow);
+        Console.SetCursorPosition(7, 4);
+        "폴리 리듬 던전은 다가오는 적을 섬멸하는 게임입니다".Print();
         Console.SetCursorPosition(7, 5);
-        "리듬에 맞춰 몬스터가 다가오는 타이밍을 정확히 맞추세요!!!".Print(ConsoleColor.Red);
+        "리듬에 맞춰 몬스터가 다가오는 타이밍을 정확히 맞추세요!".Print(ConsoleColor.Red);
         Console.SetCursorPosition(7, 8);
         "몬스터 마다 고유의 리듬을 가집니다".Print();
         Console.SetCursorPosition(7, 9);
-        "각각의 리듬은 엇박이 될수도 있습니다".Print();
+        "각각의 리듬은 합쳐질 수도, 엇박이 될 수도 있습니다".Print();
         Console.SetCursorPosition(7, 10);
-        "이것을 폴리리듬이라고 합니다".Print();
+        "                              POLY RHYTHM! ".Print(ConsoleColor.DarkGray);
         Console.SetCursorPosition(14, 13);
-        "=== 조작법 ===".Print(ConsoleColor.Yellow);
+        "조작법".Print(ConsoleColor.Yellow);
         Console.SetCursorPosition(7, 15);
-        "A 키: 왼쪽 공격!".Print(ConsoleColor.Cyan);
-        Console.SetCursorPosition(7, 16);
-        "D 키: 오른쪽 공격!".Print(ConsoleColor.Cyan);
+        "방향키 또는 WASD".Print(ConsoleColor.Gray);
         Console.SetCursorPosition(7, 17);
-        "방향키 조작 가능합니다".Print(ConsoleColor.Gray);
+        "A 키: 왼쪽 공격!".Print(ConsoleColor.Cyan);
+        Console.SetCursorPosition(7, 18);
+        "D 키: 오른쪽 공격!".Print(ConsoleColor.Cyan);
         Console.SetCursorPosition(7, 21);
         "소리를 듣고 화면을 보며 타이밍에 맞춰 물리칩시다!".Print(ConsoleColor.Cyan);
         Console.SetCursorPosition(7, 22);
@@ -250,11 +253,11 @@ public class Tutorial : Scene
         $"GOOD: {Player.goods}".Print(ConsoleColor.Blue);
         Console.SetCursorPosition(7, 12);
         "Enter를 눌러 나가기...".Print(ConsoleColor.Gray);
-        Debug.Log($"튜토리얼 결과: CRIT: {Player.crits}, PERF: {Player.perfs}, GOOD: {Player.goods}");
+        Debug.LogResult($"튜토리얼 결과: CRIT: {Player.crits}, PERF: {Player.perfs}, GOOD: {Player.goods}");
     }
     private void Fail()
     {
-        Debug.LogFatal("허걱스..튜토리얼 실패?! 유저의 실력에 에러 발생!!");
+        Debug.LogResult("허걱스..튜토리얼 실패?! 유저의 실력에 에러 발생!!");
 
         SceneManager.LoadScene(new GameOver());
     }

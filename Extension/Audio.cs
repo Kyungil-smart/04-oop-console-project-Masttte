@@ -8,7 +8,7 @@ public static class Audio
     private static extern int mciSendString(string command, string buffer, int bufferSize, IntPtr callback);
 
     private static int audioCounter = 0;
-    private const int maxAudioCounter = 31;
+    private const int maxAudioCounter = 127; // 의외로 많이 쓰더라...
 
     public static void Play(string filePath)
     {
