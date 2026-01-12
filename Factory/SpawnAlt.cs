@@ -33,16 +33,16 @@ public static partial class Spawn
 
     private static IEnumerator AirEnemyRoutine(BeatU beatU)
     {
-        Draw.BatMonster(16);
+        Draw.BatMonster(-1);
         Audio.Play("TH01.wav");
         yield return new WaitForSeconds(0.7f);
-        Draw.Empty(16); Draw.BatMonster(15);
+        Draw.Empty(-1); Draw.BatMonster(-2);
         Audio.Play("TH02.wav");
         yield return new WaitForSeconds(0.3f);
         beatU.CanAttack = true; // 판정 시작
         yield return new WaitForSeconds(0.4f);
         Audio.Play("TH02.wav");
-        Draw.Empty(15); Draw.BatMonster(14);
+        Draw.Empty(-2); Draw.BatMonster(-3);
     }
 
     //빅풋 약 2.3 초에 2박자특수
@@ -74,4 +74,34 @@ public static partial class Spawn
         yield return new WaitForSeconds(1.795f);
         beatR_HP.CanAttack = true;
     }
+
+    // 스파이더는 매우 특수한 박자
+    public static void Spider(BeatR beatR)
+    {
+        Coroutine.StartCoroutine(SpiderRoutine(beatR));
+        Coroutine.StartCoroutine(Draw.SpiderFastMoving(23));
+    }
+    private static IEnumerator SpiderRoutine(BeatR beatR)
+    {
+        Audio.Play("LogBeat01.wav");
+
+        yield return new WaitForSeconds(1.284f);
+        Draw.Empty(12); Draw.Spider(11);
+
+        yield return new WaitForSeconds(0.221f);
+        Draw.Empty(11); Draw.Spider(10);
+
+        yield return new WaitForSeconds(0.199f);
+        Draw.Empty(10); Draw.Spider(9);
+
+        yield return new WaitForSeconds(0.126f);
+        beatR.CanAttack = true;
+        yield return new WaitForSeconds(0.130f);
+        Draw.Empty(9); Draw.Spider(8);
+
+        yield return new WaitForSeconds(0.274f);
+        Draw.Empty(8); Draw.Spider(7);
+    }
+
+    
 }

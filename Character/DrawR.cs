@@ -81,6 +81,60 @@ public static partial class Draw
         }
     }
 
+    public static void Spider(int ground)
+    {
+        (int x, int y) pos = GetGridPosition(ground);
+        string[] Art = new string[]
+        {
+            "⧵╳╳⧸ ",
+            "⣿🕷◉⠯",
+            "∕╳╳⧵"
+        };
+        if (ground <= 8)
+        {
+            string[] attackArt = new string[]
+            {
+                "⧵┊╳┊∕",
+                "⣿🕷🕷◉",
+                "∕┊╳┊⧵"
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                attackArt[i].Print(ConsoleColor.DarkRed);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + i);
+                Art[i].Print(ConsoleColor.Yellow);
+            }
+        }
+    }
+
+    public static IEnumerator SpiderFastMoving(int ground) // 열거자
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            Draw.Empty(ground - i + 1);
+            (int x, int y) pos = GetGridPosition(ground - i);
+            string[] Art = new string[]
+            {
+            " ⧵╳╳⧸",
+            "⣿🕷◉⠯",
+            " ∕╳╳⧵"
+            };
+            for (int j = 0; j < 3; j++)
+            {
+                Console.SetCursorPosition(pos.x, pos.y + j);
+                Art[j].Print(ConsoleColor.Cyan);
+            }
+            yield return new WaitForSeconds(0.098f);
+        }
+    }
+
     public static void BigFoot(int ground)
     {
         (int x, int y) pos = GetGridPosition(ground);
@@ -109,7 +163,7 @@ public static partial class Draw
                 " | |  | |  | |",
                 " ⧵_|  |_|  |_/",
                 "   ⧵__/ ⧵__/  "
-            };  
+            };
 
             for (int i = 0; i < 9; i++)
             {
@@ -123,7 +177,7 @@ public static partial class Draw
             for (int i = 0; i < 9; i++)
             {
                 Console.SetCursorPosition(pos.x, pos.y + i - 6);
-                Art[i].Print(ConsoleColor.DarkYellow);
+                Art[i].Print();
             }
         }
     }
@@ -131,11 +185,11 @@ public static partial class Draw
     {
         (int x, int y) pos = GetGridPosition(ground);
 
-            for (int i = 0; i < 9; i++)
-            {
-                Console.SetCursorPosition(pos.x, pos.y + i - 6);
-                Console.Write("              ");
-            }
+        for (int i = 0; i < 9; i++)
+        {
+            Console.SetCursorPosition(pos.x, pos.y + i - 6);
+            Console.Write("              ");
+        }
     }
     public static void DieBigFoot()
     {
@@ -235,7 +289,7 @@ public static partial class Draw
             frame3[i].Print(ConsoleColor.DarkGray);
         }
 
-        yield return new WaitForSeconds(0.059f);
+        yield return new WaitForSeconds(0.065f);
 
         EmptyBig(7);
     }

@@ -86,20 +86,53 @@ public class Stage2 : Scene
                 BeatU1.TryAttack();
             }
         }
-
-        if (Input.KeyDown(Input.Key.Enter) && step == 2)
-            SceneManager.LoadScene(new Stages());
     }
 
     private IEnumerator Stage1_Start()
     {
         Draw.Player(6);
+
+        yield return new WaitForSeconds(0.10f);
+        Spawn.Spider(BeatR1);
+
+        yield return new WaitForSeconds(3.19f);
+        Spawn.Spider(BeatR1);
+        yield return new WaitForSeconds(0.805f);
+        Spawn.RabbitL(BeatL1);
+
+        yield return new WaitForSeconds(1.50f);
+        Spawn.Ghost(BeatR2);
+
+        yield return new WaitForSeconds(0.50f);
+        Spawn.Spider(BeatR1);
+        yield return new WaitForSeconds(1.00f);
+        Spawn.Bat(BeatU1);
+
+        yield return new WaitForSeconds(2.40f);
+        Spawn.Spider(BeatR1);
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(0.60f);
+        Spawn.Slime(BeatL2);
+        yield return new WaitForSeconds(2f);
+
+        Spawn.Spider(BeatR1);
+        yield return new WaitForSeconds(0.30f);
+        Spawn.Ghost(BeatR2);
+        Spawn.Slime(BeatL1);
+        yield return new WaitForSeconds(1f);
+        Spawn.Spider(BeatR1);
+        yield return new WaitForSeconds(1.4f);
+        Spawn.Bat(BeatU1);
+
+        yield return new WaitForSeconds(2f);
+
         Audio.Play("Riser01.wav");
         yield return new WaitForSeconds(0.10f);
+        Audio.Play("Scape03.wav");
         Spawn.Knocker(BeatL1); // 겹칠시 먼저 도착하는 녀석을 앞비트에 
         Spawn.Slime(BeatL2);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.9f);
         Spawn.BigFootHP(BeatR_HP);
         Spawn.BigFoot(BeatR_BigFoot);
         yield return new WaitForSeconds(1.0f);
@@ -113,20 +146,21 @@ public class Stage2 : Scene
         Spawn.BigFoot(BeatR_BigFoot);
         yield return new WaitForSeconds(1.5f);
         Spawn.Knocker(BeatL1);
-        yield return new WaitForSeconds(2.23f);
+
+        yield return new WaitForSeconds(2.23f); //빅풋 3번째
         Spawn.BigFootHP(BeatR_HP);
         Spawn.BigFoot(BeatR_BigFoot);
         yield return new WaitForSeconds(1.0f);
-        Spawn.Knocker(BeatL1);
-        Spawn.Ghost(BeatR1);
+        Spawn.Spider(BeatR1);
         yield return new WaitForSeconds(0.6f);
         Spawn.Bat(BeatU1);
-        
+
         yield return new WaitForSeconds(3f);
         Spawn.Knocker(BeatL1);
         Spawn.Slime(BeatL2);
         yield return new WaitForSeconds(1.2f);
         Spawn.RabbitR(BeatR1);
+        Spawn.Bat(BeatU1);
 
         yield return new WaitForSeconds(1.5f);
         Spawn.RabbitR(BeatR1);
@@ -144,8 +178,15 @@ public class Stage2 : Scene
         Spawn.RabbitL(BeatL1);
         yield return new WaitForSeconds(0.50f);
         Spawn.RabbitR(BeatR1);
-        yield return new WaitForSeconds(0.50f);
+        yield return new WaitForSeconds(0.20f);
+        Spawn.BigFootHP(BeatR_HP);
+        Spawn.BigFoot(BeatR_BigFoot);
+        yield return new WaitForSeconds(0.30f);
         Spawn.RabbitL(BeatL1);
+        yield return new WaitForSeconds(0.90f);
+        Spawn.Spider(BeatR2);
+        yield return new WaitForSeconds(5.00f);
+        StageClear();
     }
 
     private void OnBeatJudgeR(HitType hitType)
@@ -251,27 +292,6 @@ public class Stage2 : Scene
         }
     }
 
-    // 문 입장 연출
-    private IEnumerator EnterDoor()
-    {
-        Draw.Empty(6); Draw.Player(7);
-        Audio.Play("Dust01.wav");
-        yield return new WaitForSeconds(1.65f);
-        Draw.Empty(7); Draw.Player(8);
-        Audio.Play("Dust01.wav");
-        yield return new WaitForSeconds(0.65f);
-        Draw.Empty(8); Draw.Player(9);
-        Audio.Play("Dust01.wav");
-        yield return new WaitForSeconds(0.65f);
-        Draw.Empty(9); Draw.Player(10);
-        Audio.Play("Dust01.wav");
-        yield return new WaitForSeconds(0.65f);
-        Draw.Empty(10);
-        yield return new WaitForSeconds(0.65f);
-        Draw.EmptyBig(11);
-        Draw.Player(6);
-    }
-
     private void StageClear()
     {
         Console.Clear();
@@ -286,7 +306,7 @@ public class Stage2 : Scene
         Console.SetCursorPosition(7, 9);
         $"GOOD: {Player.goods}".Print(ConsoleColor.Blue);
         Console.SetCursorPosition(7, 12);
-        "Enter를 눌러 나가기...".Print(ConsoleColor.Gray);
+        "Q 를 눌러 나가기...".Print(ConsoleColor.Gray);
         Debug.LogResult($"stage2 결과: CRIT: {Player.crits}, PERF: {Player.perfs}, GOOD: {Player.goods}");
     }
 }

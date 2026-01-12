@@ -1,0 +1,7 @@
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Release\콘솔게임프로젝트.exe.config
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Release\콘솔게임프로젝트.exe
+C:\dev\Github\ConsolGameProject_PolyRhythm\bin\Release\콘솔게임프로젝트.pdb
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Release\콘솔게임프로젝트.csproj.AssemblyReference.cache
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Release\콘솔게임프로젝트.csproj.CoreCompileInputs.cache
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Release\콘솔게임프로젝트.exe
+C:\dev\Github\ConsolGameProject_PolyRhythm\obj\Release\콘솔게임프로젝트.pdb

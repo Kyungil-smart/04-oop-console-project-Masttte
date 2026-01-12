@@ -10,8 +10,8 @@ public class Stages : Scene
         Audio.Play("UI01.wav");
         _stageMenu = new MenuList();
         _stageMenu.Add("튜토리얼", () => SceneManager.LoadScene(new Tutorial()));
-        _stageMenu.Add("폴리 리듬 던전", () => SceneManager.LoadScene(new Stage1()));
-        _stageMenu.Add("던전 깊숙한곳", () => SceneManager.LoadScene(new Stage2()));
+        _stageMenu.Add("폴리 리듬 던전 - 도입부", () => SceneManager.LoadScene(new Stage1()));
+        _stageMenu.Add("폴리 리듬 던전 - 심층부", () => SceneManager.LoadScene(new Stage2()));
         _stageMenu.Add("타이틀", () => SceneManager.LoadScene(new Title()));
 
         if (SceneManager._prev is Stage1) // 이전 씬에 따라 간편하게 메뉴 선택
