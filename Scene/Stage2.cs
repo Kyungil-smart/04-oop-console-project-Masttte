@@ -216,7 +216,7 @@ public class Stage2 : Scene
     private void OnBeatJudgeR_Hit(HitType hitType)
     {
         Player.OnJudge -= OnBeatJudgeR_Hit;
-        Console.SetCursorPosition(23, 17);
+        Console.SetCursorPosition(28, 14);
 
         if (hitType == HitType.Miss)
         {

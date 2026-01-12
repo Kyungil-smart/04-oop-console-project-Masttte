@@ -188,21 +188,6 @@ public class Stage1 : Scene
         Console.SetCursorPosition(23, 17);
         $"Combo: {Player.combo}x".Print(ConsoleColor.Cyan);
     }
-    private void OnBeatJudgeR_Hit(HitType hitType)
-    {
-        Player.OnJudge -= OnBeatJudgeR_Hit;
-        Console.SetCursorPosition(23, 17);
-
-        if (hitType == HitType.Miss)
-        {
-            "  MISS?  ".Print(ConsoleColor.Gray);
-        }
-        else
-        {
-            
-            "   HIT   ".Print(ConsoleColor.DarkRed);
-        }
-    }
 
     private void OnBeatJudgeL(HitType hitType)
     {
