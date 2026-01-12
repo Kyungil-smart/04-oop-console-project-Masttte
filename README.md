@@ -1,1 +1,8 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22157944&assignment_repo_type=AssignmentRepo)
+### 폴리 리듬 던전은 다가오는 적을 섬멸하는 게임입니다
+### 리듬에 맞춰 몬스터가 다가오는 타이밍을 정확히 맞추세요!
+
+### 몬스터 마다 고유의 리듬을 가집니다
+### 각각의 리듬은 합쳐질 수도, 엇박이 될 수도 있습니다
+
+### 조작법
+### 방향키 또는 WASD
