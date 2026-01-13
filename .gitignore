@@ -12,4 +12,5 @@ obj/
 *.pubxml
 
 ## temp
-/bin/Debug/NeverUsed/
+bin/Debug/NeverUsed/
+bin/Release/

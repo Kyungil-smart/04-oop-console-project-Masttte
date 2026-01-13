@@ -153,7 +153,7 @@ public static partial class Draw
             frame1[i].Print(ConsoleColor.Yellow);
         }
 
-        yield return new WaitForSeconds(0.047f);
+        yield return new WaitForSeconds(0.055f);
 
         string[][] explosions = new string[][]
         {
@@ -185,7 +185,7 @@ public static partial class Draw
             selectedExplosion[i].Print(ConsoleColor.White);
         }
 
-        yield return new WaitForSeconds(0.056f);
+        yield return new WaitForSeconds(0.06f);
 
         string[] frame3 = new string[]
         {
@@ -200,7 +200,7 @@ public static partial class Draw
             frame3[i].Print(ConsoleColor.Gray);
         }
 
-        yield return new WaitForSeconds(0.065f);
+        yield return new WaitForSeconds(0.069f);
 
         Empty(ground);
     }
@@ -224,7 +224,7 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i);
             frame1[i].Print(ConsoleColor.Yellow);
         }
-        yield return new WaitForSeconds(0.047f);
+        yield return new WaitForSeconds(0.053f);
 
         // 프레임 2 - 깃털과 폭발
         string[][] explosions = new string[][]
@@ -255,7 +255,7 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i);
             selectedExplosion[i].Print(ConsoleColor.Magenta);
         }
-        yield return new WaitForSeconds(0.056f);
+        yield return new WaitForSeconds(0.059f);
 
         // 프레임 3 - 떨어지는 깃털
         string[] frame3 = new string[]
@@ -269,7 +269,7 @@ public static partial class Draw
             Console.SetCursorPosition(pos.x, pos.y + i);
             frame3[i].Print(ConsoleColor.DarkGray);
         }
-        yield return new WaitForSeconds(0.065f);
+        yield return new WaitForSeconds(0.069f);
 
         Empty(-3);
     }
