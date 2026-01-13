@@ -74,7 +74,7 @@ public class Stages : Scene
             _stageMenu.Select();
         }
 
-        System.Threading.Thread.Sleep(50);
+        System.Threading.Thread.Sleep(50); // 실수로 안지운건데 뭔가 묵직하게 움직이는듯. 이제 기능이야
     }
 
     private void Render()

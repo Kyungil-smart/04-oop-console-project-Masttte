@@ -224,7 +224,6 @@ public class Stage2 : Scene
         }
         else
         {
-
             "   HIT   ".Print(ConsoleColor.DarkRed);
         }
     }
