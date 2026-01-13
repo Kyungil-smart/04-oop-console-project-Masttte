@@ -85,16 +85,15 @@ public abstract class Beat : Player
         }
     }
 
-    public HitType TryAttack()
+    public void TryAttack()
     {
-        if (!_canAttack) return HitType.None;
+        if (!_canAttack) return;
 
         HitType result = Judge(perfectTime);
         ProcessHit(result);
         if (result != HitType.Miss) Attack();
 
         _canAttack = false;
-        return result;
     }
 
     protected abstract void Attack();
